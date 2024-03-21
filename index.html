@@ -4,16 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AES Encryption and Decryption Tool</title>
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 </head>
 <body>
     <div class="container">
         <h1>AES Encryption and Decryption Tool</h1>
         <textarea id="inputText" placeholder="Enter text to encrypt or decrypt"></textarea>
-        <button onclick="encrypt()">Encrypt</button>
-        <button onclick="decrypt()">Decrypt</button>
+        <input type="text" id="key" placeholder="Enter encryption key">
+        <button onclick="encryptCBC()">Encrypt CBC</button>
+        <button onclick="decryptCBC()">Decrypt CBC</button>
+        <button onclick="encryptECB()">Encrypt ECB</button>
+        <button onclick="decryptECB()">Decrypt ECB</button>
         <textarea id="outputText" placeholder="Result" readonly></textarea>
     </div>
-    <script src="scripts.js"></script>
+    <script>
+        // AES encryption function with CBC mode
+        function encryptCBC() {
+            const plaintext = document.getElementById("inputText").value;
+            const key = document.getElementById("key").value;
+            const ciphertext = CryptoJS.AES.encrypt(plaintext, key, { mode: CryptoJS.mode.CBC }).toString();
+            document.getElementById("outputText").value = ciphertext;
+        }
+
+        // AES decryption function with CBC mode
+        function decryptCBC() {
+            const ciphertext = document.getElementById("inputText").value;
+            const key = document.getElementById("key").value;
+            const bytes = CryptoJS.AES.decrypt(ciphertext, key, { mode: CryptoJS.mode.CBC });
+            const decryptedText = bytes.toString(CryptoJS.enc.Utf8);
+            document.getElementById("outputText").value = decryptedText;
+        }
+
+        // AES encryption function with ECB mode
+        function encryptECB() {
+            const plaintext = document.getElementById("inputText").value;
+            const key = document.getElementById("key").value;
+            const ciphertext = CryptoJS.AES.encrypt(plaintext, key, { mode: CryptoJS.mode.ECB }).toString();
+            document.getElementById("outputText").value = ciphertext;
+        }
+
+        // AES decryption function with ECB mode
+        function decryptECB() {
+            const ciphertext = document.getElementById("inputText").value;
+            const key = document.getElementById("key").value;
+            const bytes = CryptoJS.AES.decrypt(ciphertext, key, { mode: CryptoJS.mode.ECB });
+            const decryptedText = bytes.toString(CryptoJS.enc.Utf8);
+            document.getElementById("outputText").value = decryptedText;
+        }
+    </script>
 </body>
 </html>
