@@ -11,6 +11,10 @@
         <h1>AES Encryption and Decryption Tool</h1>
         <textarea id="inputText" placeholder="Enter text to encrypt or decrypt"></textarea>
         <input type="text" id="key" placeholder="Enter encryption key">
+        <select id="keyLength">
+            <option value="128">128-bit</option>
+            <option value="256">256-bit</option>
+        </select>
         <button onclick="encryptCBC()">Encrypt CBC</button>
         <button onclick="decryptCBC()">Decrypt CBC</button>
         <button onclick="encryptECB()">Encrypt ECB</button>
@@ -22,7 +26,9 @@
         function encryptCBC() {
             const plaintext = document.getElementById("inputText").value;
             const key = document.getElementById("key").value;
-            const ciphertext = CryptoJS.AES.encrypt(plaintext, key, { mode: CryptoJS.mode.CBC }).toString();
+            const keyLength = parseInt(document.getElementById("keyLength").value);
+            const options = { mode: CryptoJS.mode.CBC, keySize: keyLength / 8 };
+            const ciphertext = CryptoJS.AES.encrypt(plaintext, key, options).toString();
             document.getElementById("outputText").value = ciphertext;
         }
 
@@ -30,7 +36,9 @@
         function decryptCBC() {
             const ciphertext = document.getElementById("inputText").value;
             const key = document.getElementById("key").value;
-            const bytes = CryptoJS.AES.decrypt(ciphertext, key, { mode: CryptoJS.mode.CBC });
+            const keyLength = parseInt(document.getElementById("keyLength").value);
+            const options = { mode: CryptoJS.mode.CBC, keySize: keyLength / 8 };
+            const bytes = CryptoJS.AES.decrypt(ciphertext, key, options);
             const decryptedText = bytes.toString(CryptoJS.enc.Utf8);
             document.getElementById("outputText").value = decryptedText;
         }
@@ -39,7 +47,9 @@
         function encryptECB() {
             const plaintext = document.getElementById("inputText").value;
             const key = document.getElementById("key").value;
-            const ciphertext = CryptoJS.AES.encrypt(plaintext, key, { mode: CryptoJS.mode.ECB }).toString();
+            const keyLength = parseInt(document.getElementById("keyLength").value);
+            const options = { mode: CryptoJS.mode.ECB, keySize: keyLength / 8 };
+            const ciphertext = CryptoJS.AES.encrypt(plaintext, key, options).toString();
             document.getElementById("outputText").value = ciphertext;
         }
 
@@ -47,7 +57,9 @@
         function decryptECB() {
             const ciphertext = document.getElementById("inputText").value;
             const key = document.getElementById("key").value;
-            const bytes = CryptoJS.AES.decrypt(ciphertext, key, { mode: CryptoJS.mode.ECB });
+            const keyLength = parseInt(document.getElementById("keyLength").value);
+            const options = { mode: CryptoJS.mode.ECB, keySize: keyLength / 8 };
+            const bytes = CryptoJS.AES.decrypt(ciphertext, key, options);
             const decryptedText = bytes.toString(CryptoJS.enc.Utf8);
             document.getElementById("outputText").value = decryptedText;
         }
