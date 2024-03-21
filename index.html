@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AES-256 CBC Encryption/Decryption Demo</title>
+    <style>
+        /* Add basic styling for a clean layout (optional) */
+    </style>
+</head>
+<body>
+    <h1>AES-256 CBC Encryption/Decryption</h1>
+    <p>Enter your text to encrypt/decrypt:</p>
+    <textarea id="inputText" rows="5" cols="50"></textarea>
+    <br>
+    <label for="secretKey">Secret Key (32 characters):</label>
+    <input type="text" id="secretKey" maxlength="32">
+    <br>
+    <label for="initializationVector">Initialization Vector (16 characters):</label>
+    <input type="text" id="initializationVector" maxlength="16">
+    <br>
+    <button onclick="encrypt()">Encrypt</button>
+    <button onclick="decrypt()">Decrypt</button>
+    <br>
+    <p id="outputText"></p>
+
+    <script src="script.js"></script>
+</body>
+</html>
