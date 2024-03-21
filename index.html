@@ -3,66 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AES Encryption and Decryption Tool</title>
+    <title>Encryption and Decryption Tool</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    margin: 20px auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+input, select, button {
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#outputText {
+    resize: vertical;
+}
+
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>AES Encryption and Decryption Tool</h1>
+        <h1>Encryption and Decryption Tool</h1>
         <textarea id="inputText" placeholder="Enter text to encrypt or decrypt"></textarea>
         <input type="text" id="key" placeholder="Enter encryption key">
         <select id="keyLength">
             <option value="128">128-bit</option>
             <option value="256">256-bit</option>
         </select>
-        <button onclick="encryptCBC()">Encrypt CBC</button>
-        <button onclick="decryptCBC()">Decrypt CBC</button>
         <button onclick="encryptECB()">Encrypt ECB</button>
         <button onclick="decryptECB()">Decrypt ECB</button>
         <textarea id="outputText" placeholder="Result" readonly></textarea>
     </div>
-    <script>
-        // AES encryption function with CBC mode
-        function encryptCBC() {
-            const plaintext = document.getElementById("inputText").value;
-            const key = document.getElementById("key").value;
-            const keyLength = parseInt(document.getElementById("keyLength").value);
-            const options = { mode: CryptoJS.mode.CBC, keySize: keyLength / 8 };
-            const ciphertext = CryptoJS.AES.encrypt(plaintext, key, options).toString();
-            document.getElementById("outputText").value = ciphertext;
-        }
-
-        // AES decryption function with CBC mode
-        function decryptCBC() {
-            const ciphertext = document.getElementById("inputText").value;
-            const key = document.getElementById("key").value;
-            const keyLength = parseInt(document.getElementById("keyLength").value);
-            const options = { mode: CryptoJS.mode.CBC, keySize: keyLength / 8 };
-            const bytes = CryptoJS.AES.decrypt(ciphertext, key, options);
-            const decryptedText = bytes.toString(CryptoJS.enc.Utf8);
-            document.getElementById("outputText").value = decryptedText;
-        }
-
-        // AES encryption function with ECB mode
-        function encryptECB() {
-            const plaintext = document.getElementById("inputText").value;
-            const key = document.getElementById("key").value;
-            const keyLength = parseInt(document.getElementById("keyLength").value);
-            const options = { mode: CryptoJS.mode.ECB, keySize: keyLength / 8 };
-            const ciphertext = CryptoJS.AES.encrypt(plaintext, key, options).toString();
-            document.getElementById("outputText").value = ciphertext;
-        }
-
-        // AES decryption function with ECB mode
-        function decryptECB() {
-            const ciphertext = document.getElementById("inputText").value;
-            const key = document.getElementById("key").value;
-            const keyLength = parseInt(document.getElementById("keyLength").value);
-            const options = { mode: CryptoJS.mode.ECB, keySize: keyLength / 8 };
-            const bytes = CryptoJS.AES.decrypt(ciphertext, key, options);
-            const decryptedText = bytes.toString(CryptoJS.enc.Utf8);
-            document.getElementById("outputText").value = decryptedText;
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
